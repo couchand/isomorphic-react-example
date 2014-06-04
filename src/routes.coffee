@@ -14,7 +14,6 @@ module.exports = (match) ->
     apiClient.get "/posts.json", (err, res) ->
       return callback err if err
 
-      console.log "fdsf", res
       posts = res.body
       callback null, "posts", {posts}
 

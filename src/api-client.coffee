@@ -10,7 +10,7 @@ port = process.env.PORT or 3030
   module.exports[method] = (path) ->
     args = Array.prototype.slice.call arguments, 1
     args = [formatUrl path].concat args
-    console.log args
+
     superagent[method].apply superagent, args
 
 formatUrl = if isServer
