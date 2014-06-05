@@ -81,9 +81,11 @@ class Router
       callback err
 
   wrapWithLayout: (component, callback) ->
+    layout = views.layout
     try
-      layout = views.layout
-      callback null, layout body: component
+      contents = React.renderComponentToString component
+      page = React.renderComponentToString layout body: contents
+      callback null, page
     catch err
       callback err
 
@@ -94,16 +96,13 @@ class Router
       document.getElementById "view-container"
 
   handleServerRoute: (component, {req, res}) ->
-    contents = React.renderComponentToString component
-
-    @wrapWithLayout contents, (err, page) ->
+    @wrapWithLayout component, (err, page) ->
       if err
         res.statusCode = 500
         res.send err
         return
 
-      html = React.renderComponentToString page
-      res.send html
+      res.send page
 
   middleware: ->
     router = @directorRouter
