@@ -1,15 +1,14 @@
 # router
 
-firstRender = yes
-
 director = require 'director'
-React = require 'react'
+React    = require 'react'
 
 views = require "./views"
 
 isServer = typeof window is 'undefined'
-
 renderer = if isServer then 'server' else 'client'
+
+firstRender = yes
 
 DirectorRouter = if isServer
   director.http.Router
@@ -90,24 +89,28 @@ class Router
 
   handleClientRoute: (component) ->
     return firstRender = no if firstRender
+
     React.renderComponent component,
       document.getElementById "view-container"
 
   handleServerRoute: (component, {req, res}) ->
     contents = React.renderComponentToString component
+
     @wrapWithLayout contents, (err, page) ->
       if err
         res.statusCode = 500
         res.send err
         return
+
       html = React.renderComponentToString page
       res.send html
 
   middleware: ->
-    directorRouter = @directorRouter
+    router = @directorRouter
+
     (req, res, next) ->
-      directorRouter.attach -> @next = next
-      directorRouter.dispatch req, res, (err) ->
+      router.attach -> @next = next
+      router.dispatch req, res, (err) ->
         next() if err and err.status is 404
 
   start: ->
@@ -117,6 +120,7 @@ class Router
       el = e.target
       dataset = el and el.dataset
       redirect = not dataset.passThru
+
       if el and el.nodeName is 'A' and redirect
         @directorRouter.setRoute el.attributes.href.value
         e.preventDefault()
