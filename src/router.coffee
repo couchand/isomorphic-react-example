@@ -3,7 +3,7 @@
 director = require 'director'
 React = require 'react'
 
-viewDir = "./views"
+views = require "./views"
 
 isServer = typeof window is 'undefined'
 
@@ -74,14 +74,14 @@ class Router
 
   renderView: (path, data, callback) ->
     try
-      component = require "#{viewDir}/#{path}"
+      component = views[path]
       callback null, component data
     catch err
       callback err
 
   wrapWithLayout: (component, callback) ->
     try
-      layout = require "#{viewDir}/layout"
+      layout = views.layout
       callback null, layout body: component
     catch err
       callback err
