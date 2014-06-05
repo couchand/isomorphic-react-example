@@ -1,0 +1,56 @@
+.debug {
+  position: fixed;
+  bottom: 7px;
+  right: 23px;
+  font-size: 80%;
+}
+
+/* the following from Bootstrap */
+
+h1, .h1 {
+  font-size: 36px;
+}
+h1, h2, h3 {
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  color: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+}
+small {
+  font-size: 85%;
+}
+ul, ol {
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+a {
+  color: #428BCA;
+  text-decoration: none;
+}
+a:hover {
+  color: #2A6496;
+  text-decoration: underline;
+}
+body {
+  color: #333333;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.42857;
+}
+.container:before, .container:after {
+    content: " ";
+    display: table;
+}
+.container:after {
+    clear: both;
+}
+.container {
+    width: 970px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
