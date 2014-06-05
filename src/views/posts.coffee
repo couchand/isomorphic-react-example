@@ -7,6 +7,7 @@ module.exports = React.createClass
   displayName: "Posts"
   render: ->
     div null,
+      h1 null, "Posts"
       ul null,
         for post in @props.posts
           li
