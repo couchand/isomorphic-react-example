@@ -15,6 +15,6 @@ module.exports = React.createClass
         div
           className: "container"
           id: "view-container"
-          @props.body
+          dangerouslySetInnerHTML: __html: @props.body
 
         script src: "/script.js"

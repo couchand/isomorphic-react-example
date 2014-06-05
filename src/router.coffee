@@ -1,5 +1,7 @@
 # router
 
+firstRender = yes
+
 director = require 'director'
 React = require 'react'
 
@@ -87,11 +89,13 @@ class Router
       callback err
 
   handleClientRoute: (component) ->
+    return firstRender = no if firstRender
     React.renderComponent component,
       document.getElementById "view-container"
 
   handleServerRoute: (component, {req, res}) ->
-    @wrapWithLayout component, (err, page) ->
+    contents = React.renderComponentToString component
+    @wrapWithLayout contents, (err, page) ->
       if err
         res.statusCode = 500
         res.send err
